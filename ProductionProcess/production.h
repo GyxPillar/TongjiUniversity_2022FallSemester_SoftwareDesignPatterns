@@ -13,7 +13,7 @@ namespace hjh
         }
         virtual ~Core() {}
         virtual Core *Clone() const = 0;
-        virtual void product(std::string coreType)
+        virtual void Product(std::string coreType)
         {
             std::cout << coreType << " Producting..." << '\n';
             this->coreType = coreType;
@@ -71,7 +71,7 @@ namespace hjh
         {
             return new NullUnit(*this);
         }
-        void product(std::string coreType) override
+        void Product(std::string coreType) override
         {
             std::cout << coreType << " is not a legal core type!" << '\n';
         }
@@ -109,26 +109,33 @@ namespace hjh
     };
 
     // 客户端执行程序段
-    void Client(CoreFactory &coreFactory)
+    class Client
     {
-        bool loop = true;
-        while (loop)
+    private:
+    public:
+        Client();
+        ~Client();
+        static void ClientCode(CoreFactory &coreFactory)
         {
-            std::cout << "please type the core type you want to product: " << '\n';
-            std::cout << "now \"CPU\" and \"GPU\" is available, type \"Exit\" to exit this step" << '\n';
-            std::cout << "[Type]: ";
-            std::string coreType;
-            std::cin >> coreType;
-            if (coreType == "Exit")
+            bool loop = true;
+            while (loop)
             {
-                loop = false;
-                continue;
+                std::cout << "please type the core type you want to Product: " << '\n';
+                std::cout << "now \"CPU\" and \"GPU\" is available, type \"Exit\" to exit this step" << '\n';
+                std::cout << "[Type]: ";
+                std::string coreType;
+                std::cin >> coreType;
+                if (coreType == "Exit")
+                {
+                    loop = false;
+                    continue;
+                }
+                // 直接通过coreFactory生产（克隆）类型为coreType的核心，如果没有该类型核心则返回空对象
+                Core *core = coreFactory.CreateCore(coreType);
+                core->Product(coreType);
+                delete core;
+                std::cout << "\n";
             }
-            // 直接通过coreFactory生产（克隆）类型为coreType的核心，如果没有该类型核心则返回空对象
-            Core *core = coreFactory.CreateCore(coreType);
-            core->product(coreType);
-            delete core;
-            std::cout << "\n";
         }
-    }
+    };
 } // namespace hjh

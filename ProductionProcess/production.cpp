@@ -17,7 +17,7 @@ int main()
 
     // 同时实现原型模式和空对象模式
     hjh::CoreFactory *coreFactory = new hjh::CoreFactory();
-    hjh::Client(*coreFactory); // 执行客户端代码段
+    hjh::Client::ClientCode(*coreFactory); // 执行客户端代码段
     delete coreFactory;
 
     std::cout << '\n';
