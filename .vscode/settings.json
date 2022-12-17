@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.S": "gas",
+        "ostream": "cpp",
+        "iostream": "cpp"
+    }
+}
