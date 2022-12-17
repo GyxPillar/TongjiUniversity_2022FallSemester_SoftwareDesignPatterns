@@ -1,8 +1,3 @@
-clean: 
-	@echo "Cleaning"
-	-del /a /f /s /q  "*.exe" "*.pdb" "*.ilk" "*.obj"
-	@echo "Done!"
-
 build:
 	-cl '1-Purchase-gjc/1.cpp' /Fe:'module/1.exe'
 	-cl '2-FactoryStructure-gyx/2.cpp' /Fe:'module/2.exe'
@@ -13,3 +8,8 @@ build:
 	-cl '7-Sales-xjx/7.cpp' /Fe:'module/7.exe'
 	-cl 'main.cpp' /Fe:'main.exe'
 	-del /a /f /s /q "*.obj"
+
+clean: 
+	@echo "Cleaning"
+	-del /a /f /s /q  "*.exe" "*.pdb" "*.ilk" "*.obj"
+	@echo "Done!"
